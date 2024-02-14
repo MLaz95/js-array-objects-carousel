@@ -127,7 +127,7 @@ previewArray.forEach(function(element, index){
 })
 
 // auto scorrimento
-setInterval(function(){
+let autoplay = setInterval(function(){
     nextSlide(slideNumber);
 
     if (slideNumber < slideArray.length - 1){
@@ -136,6 +136,41 @@ setInterval(function(){
         slideNumber = 0
     }
 }, 3000)
+
+const stopButton = document.getElementById('btn-stop');
+const playButton = document.getElementById('btn-go');
+const backButton = document.getElementById('btn-back');
+
+stopButton.addEventListener('click', function(){
+    clearInterval(autoplay)
+})
+
+playButton.addEventListener('click', function(){
+    clearInterval(autoplay)
+    autoplay = setInterval(function(){
+        nextSlide(slideNumber);
+    
+        if (slideNumber < slideArray.length - 1){
+            slideNumber++;
+        } else{
+            slideNumber = 0
+        }
+    }, 3000)
+})
+
+backButton.addEventListener('click', function(){
+    clearInterval(autoplay)
+    autoplay = setInterval(function(){
+        previousSlide(slideNumber);
+    
+        if (slideNumber > 0) {
+            slideNumber--
+        } else{
+            slideNumber = slideArray.length - 1;
+        }
+    }, 3000)
+})
+
 
 // FUNCTION
 

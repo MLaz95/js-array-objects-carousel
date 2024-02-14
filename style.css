@@ -109,7 +109,7 @@
 #preview #arrows > * {
     transform: scale(1);
     transition: transform 0.4s ease;
-    
+
     z-index: 1;
 }
 
@@ -117,4 +117,37 @@
     cursor: pointer;
 
     transform: scale(1.2);
+}
+
+#button-group{
+    position: absolute;
+    left: 0;
+    top: -35px;
+
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background-color: black;
+
+    border-radius: 15px;
+    padding: 5px;
+
+    z-index: 10;
+}
+
+.btn{
+    background-color: transparent;
+    border: none;
+    transform: scale(1);
+    transition: transform 0.5s linear;
+}
+
+.btn:hover{
+    cursor: pointer;
+    transform: scale(1.2);
+}
+
+#button-group i{
+    color: white;
+    font-size: 2em;
 }
