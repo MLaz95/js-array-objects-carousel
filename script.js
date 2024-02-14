@@ -89,67 +89,26 @@ let slideNumber = 0;
 // DOWN ARROW
 document.querySelector("#down-arrow").addEventListener("click", function() {
 
-    if (slideNumber < slideArray.length - 1) {
-        // - prendo l'immagine attuale e le rimuovo la classe "active"  
-        slideArray[slideNumber].classList.remove("active");
-        previewArray[slideNumber].classList.remove("active");
+    nextSlide(slideNumber);
 
-
-        // - aumento il contatore di 1
+    if (slideNumber < slideArray.length - 1){
         slideNumber++;
-
-        // - prendo l'immagine con il nuovo contatore e le aggiungo la classe "active"
-        slideArray[slideNumber].classList.add("active");
-        previewArray[slideNumber].classList.add("active");
-
-    } else {
-        // - prendo l'immagine attuale e le rimuovo la classe "active"  
-        slideArray[slideNumber].classList.remove("active");
-        previewArray[slideNumber].classList.remove("active");
-
-
-        // resetto la variabile che mi conta l'immagine a cui sono arrivato
-        slideNumber = 0;
-
-        // - prendo l'immagine con il nuovo contatore e le aggiungo la classe "active"
-        slideArray[slideNumber].classList.add("active");
-        previewArray[slideNumber].classList.add("active");
+    } else{
+        slideNumber = 0
     }
-
-    console.log(slideNumber)
+    
 });
 
 // UP ARROW
 document.querySelector("#up-arrow").addEventListener("click", function() {
 
+    previousSlide(slideNumber);
+
     if (slideNumber > 0) {
-        // - prendo l'immagine attuale e le rimuovo la classe "active"  
-        slideArray[slideNumber].classList.remove("active");
-        previewArray[slideNumber].classList.remove("active");
-
-        // - diminuisco il contatore di 1
-        slideNumber--;
-
-        // - prendo l'immagine con il nuovo contatore e le aggiungo la classe "active"
-        slideArray[slideNumber].classList.add("active");
-        previewArray[slideNumber].classList.add("active");
-
-    } else {
-
-        // - prendo l'immagine attuale e le rimuovo la classe "active"  
-        slideArray[slideNumber].classList.remove("active");
-        previewArray[slideNumber].classList.remove("active");
-
-
-        // - metto il valore di slideNumebr = alla posizione dell'ultima immagine
+        slideNumber--
+    } else{
         slideNumber = slideArray.length - 1;
-
-        // - prendo l'immagine con il nuovo contatore e le aggiungo la classe "active"
-        slideArray[slideNumber].classList.add("active");
-        previewArray[slideNumber].classList.add("active");
-
     }
-    console.log(slideNumber)
 });
 
 // when clicking on preview it show shows that image
@@ -166,3 +125,80 @@ previewArray.forEach(function(element, index){
         console.log(slideNumber)
     })
 })
+
+// auto scorrimento
+setInterval(function(){
+    nextSlide(slideNumber);
+
+    if (slideNumber < slideArray.length - 1){
+        slideNumber++;
+    } else{
+        slideNumber = 0
+    }
+}, 3000)
+
+// FUNCTION
+
+function nextSlide (n){
+    if (n < slideArray.length - 1) {
+        // - prendo l'immagine attuale e le rimuovo la classe "active"  
+        slideArray[n].classList.remove("active");
+        previewArray[n].classList.remove("active");
+
+
+        // - aumento il contatore di 1
+        n++;
+
+        // - prendo l'immagine con il nuovo contatore e le aggiungo la classe "active"
+        slideArray[n].classList.add("active");
+        previewArray[n].classList.add("active");
+
+
+    } else {
+        // - prendo l'immagine attuale e le rimuovo la classe "active"  
+        slideArray[n].classList.remove("active");
+        previewArray[n].classList.remove("active");
+
+
+        // resetto la variabile che mi conta l'immagine a cui sono arrivato
+        n = 0;
+
+        // - prendo l'immagine con il nuovo contatore e le aggiungo la classe "active"
+        slideArray[n].classList.add("active");
+        previewArray[n].classList.add("active");
+
+    }
+
+    console.log(n)
+}
+
+function previousSlide (n){
+    if (n > 0) {
+        // - prendo l'immagine attuale e le rimuovo la classe "active"  
+        slideArray[n].classList.remove("active");
+        previewArray[n].classList.remove("active");
+
+        // - diminuisco il contatore di 1
+        n--;
+
+        // - prendo l'immagine con il nuovo contatore e le aggiungo la classe "active"
+        slideArray[n].classList.add("active");
+        previewArray[n].classList.add("active");
+
+    } else {
+
+        // - prendo l'immagine attuale e le rimuovo la classe "active"  
+        slideArray[n].classList.remove("active");
+        previewArray[n].classList.remove("active");
+
+
+        // - metto il valore di slideNumebr = alla posizione dell'ultima immagine
+        n = slideArray.length - 1;
+
+        // - prendo l'immagine con il nuovo contatore e le aggiungo la classe "active"
+        slideArray[n].classList.add("active");
+        previewArray[n].classList.add("active");
+
+    }
+    console.log(n)
+}
