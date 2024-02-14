@@ -25,7 +25,9 @@ const images = [
 
 
 // targeting the slider
-const sliderElement = document.getElementById("slider");
+const sliderElement = document.getElementById('slider');
+// targeting the preview window
+const previewElement = document.getElementById('preview');
 
 // for each object in the array
 images.forEach(function(singleImage, index){
@@ -58,6 +60,12 @@ images.forEach(function(singleImage, index){
 
     // puts slide in page
     sliderElement.append(newSlide)
+
+    // SIDE PREVIEWS
+    const previewImage = slideImage.cloneNode(true);
+    
+    previewElement.append(previewImage);
+
 })
 
 
