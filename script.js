@@ -1,14 +1,4 @@
-/*
-Adesso rimuoviamo tutto il markup statico e inseriamo tutte le immagini dinamicamente servendoci dell'array fornito e un semplice ciclo for che concatena un template literal. 
-Tutte le immagini saranno nascoste, tranne la prima, che avrà una classe specifica che la renderà visibile.
-Al termine di questa fase ci ritroveremo con lo stesso slider stilato nella milestone 1, ma costruito dinamicamente attraverso JavaScript.
-*/
-
-
-// bersagliamo lo slider
-// tramite un ciclo for prendiamo ogni indirizzo delle immagini dall'array
-// per ognuno di essi andremo a creare un elemento img dentro lo slider
-
+// array of objects with all the data
 const images = [
     {
         image: 'img/01.webp',
@@ -34,11 +24,12 @@ const images = [
 ];
 
 
-// bersagliamo lo slider
+// targeting the slider
 const sliderElement = document.getElementById("slider");
 
+// for each object in the array
 images.forEach(function(singleImage, index){
-    // creates slide container
+    // creates a slide container
     const newSlide = document.createElement('div');
     newSlide.classList.add('slide');
 
@@ -64,14 +55,14 @@ images.forEach(function(singleImage, index){
 
     // puts text container in slide
     newSlide.append(slideInfo)
+
     // puts slide in page
     sliderElement.append(newSlide)
-
 })
 
 
 // selects the first .slide and gives it class active
-document.querySelector(".slide").classList.add('active');
+document.querySelector(".slide:nth-of-type(1)").classList.add('active');
 
 /*
 -  salvo un contatore della slide
@@ -82,70 +73,59 @@ document.querySelector(".slide").classList.add('active');
 */
 
 
-// -  salvo un contatore della slide
+// slide counter
 let slideNumber = 1;
 
-// -  QUANDO premo la freccia SU
+// UP ARROW
 document.querySelector("#up-arrow").addEventListener("click", function() {
 
-
     if (slideNumber < images.length) {
-
         // - prendo l'immagine attuale e le rimuovo la classe "active"  
-        document.querySelector(`#slider img:nth-of-type(${slideNumber})`).classList.remove("active");
+        document.querySelector(`.slide:nth-of-type(${slideNumber})`).classList.remove("active");
 
         // - aumento il contatore di 1
         slideNumber++;
 
         // - prendo l'immagine con il nuovo contatore e le aggiungo la classe "active"
-        document.querySelector(`#slider img:nth-of-type(${slideNumber})`).classList.add("active");
-
-        console.log(slideNumber);
-
+        document.querySelector(`.slide:nth-of-type(${slideNumber})`).classList.add("active");
     } else {
 
         // - prendo l'immagine attuale e le rimuovo la classe "active"  
-        document.querySelector(`#slider img:nth-of-type(${slideNumber})`).classList.remove("active");
+        document.querySelector(`.slide:nth-of-type(${slideNumber})`).classList.remove("active");
 
         // resetto la variabile che mi conta l'immagine a cui sono arrivato
         slideNumber = 1;
 
         // - prendo l'immagine con il nuovo contatore e le aggiungo la classe "active"
-        document.querySelector(`#slider img:nth-of-type(${slideNumber})`).classList.add("active");
+        document.querySelector(`.slide:nth-of-type(${slideNumber})`).classList.add("active");
 
     }
 
         
 });
 
-
+// DOWN ARROW
 document.querySelector("#down-arrow").addEventListener("click", function() {
 
     if (slideNumber > 1) {
         // - prendo l'immagine attuale e le rimuovo la classe "active"  
-        document.querySelector(`#slider img:nth-of-type(${slideNumber})`).classList.remove("active");
+        document.querySelector(`.slide:nth-of-type(${slideNumber})`).classList.remove("active");
 
         // - diminuisco il contatore di 1
         slideNumber--;
 
         // - prendo l'immagine con il nuovo contatore e le aggiungo la classe "active"
-        document.querySelector(`#slider img:nth-of-type(${slideNumber})`).classList.add("active");
-
-        console.log(slideNumber);
+        document.querySelector(`.slide:nth-of-type(${slideNumber})`).classList.add("active");
 
     } else {
 
         // - prendo l'immagine attuale e le rimuovo la classe "active"  
-        document.querySelector(`#slider img:nth-of-type(${slideNumber})`).classList.remove("active");
+        document.querySelector(`.slide:nth-of-type(${slideNumber})`).classList.remove("active");
 
         // - metto il valore di slideNumebr = alla posizione dell'ultima immagine
         slideNumber = images.length;
 
         // - prendo l'immagine con il nuovo contatore e le aggiungo la classe "active"
-        document.querySelector(`#slider img:nth-of-type(${slideNumber})`).classList.add("active");
-
+        document.querySelector(`.slide:nth-of-type(${slideNumber})`).classList.add("active");
     }
-    
-
-
 });
